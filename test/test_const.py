@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from main import Const
+from src.model import Const
 
 
 class TestConst(TestCase):

@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from main import Threshold
+from src.model import Threshold
 
 
 class TestThreshold(TestCase):

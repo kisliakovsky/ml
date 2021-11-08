@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from main import Mse
+from src.accuracy import Mse
 
 
 class TestMse(TestCase):

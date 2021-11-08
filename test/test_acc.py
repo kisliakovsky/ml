@@ -1,6 +1,7 @@
 from unittest import TestCase
 
-from main import Acc, Const, Threshold
+from src.model import Const, Threshold
+from src.accuracy import Acc
 
 
 class TestAcc(TestCase):
