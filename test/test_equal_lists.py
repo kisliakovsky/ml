@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from src.core import Equal, EqualLists
+from src.core import EqualLists
 
 
 class TestEqualLists(TestCase):

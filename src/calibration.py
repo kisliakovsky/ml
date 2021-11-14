@@ -1,7 +1,7 @@
 from typing import List
 
 from src.accuracy import Mse
-from src.model import ParametersGenerator, LinearRegression, Model
+from src.model import ParametersGenerator, LinearRegression
 
 
 class Calibration(object):
