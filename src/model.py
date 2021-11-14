@@ -10,26 +10,26 @@ from src.core import Sum
 class Model(ABC):
 
     @abstractmethod
-    def rational_value(self, params: List[Rational]) -> Rational:
+    def apply(self, features: List[Rational]) -> Rational:
         pass
 
 
 class Const(Model):
-    def __init__(self, value: Rational):
-        self.__value = value
+    def __init__(self, parameter: Rational):
+        self.__parameter = parameter
 
-    def rational_value(self, params: List[Rational]) -> Rational:
-        return self.__value
+    def apply(self, features: List[Rational]) -> Rational:
+        return self.__parameter
 
 
 class Threshold(Model):
-    def __init__(self, value: Rational):
-        self.__value = value
+    def __init__(self, parameter: Rational):
+        self.__parameter = parameter
 
-    def rational_value(self, params: List[Rational]) -> Rational:
-        if len(params) == 0:
+    def apply(self, features: List[Rational]) -> Rational:
+        if len(features) == 0:
             raise ValueError("Number of params must be greater than zero")
-        return 0 if params[-1] < self.__value else 1
+        return 0 if features[-1] < self.__parameter else 1
 
 
 class ParametersGenerator(object):
@@ -49,15 +49,15 @@ class ParametersGenerator(object):
 
 
 class LinearRegression(Model):
-    def __init__(self, parameters: List[Rational], bias: Rational):
-        self.__coefficients = parameters
-        self.__bias = bias
+    def __init__(self, parameters: List[Rational]):
+        self.__feature_parameters = parameters[1:]
+        self.__bias = parameters[0]
 
     def __products(self, features: List[Rational]):
-        for i, param in enumerate(self.__coefficients):
-            yield param * features[i]
+        for i, feature_parameter in enumerate(self.__feature_parameters):
+            yield feature_parameter * features[i]
 
-    def rational_value(self, params: List[Rational]) -> Rational:
-        if len(params) != len(self.__coefficients):
+    def apply(self, features: List[Rational]) -> Rational:
+        if len(features) != len(self.__feature_parameters):
             raise ValueError("Number of params and values must be the equal")
-        return reduce(Sum.sum, self.__products(params), self.__bias)
+        return reduce(Sum.sum, self.__products(features), self.__bias)

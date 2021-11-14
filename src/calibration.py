@@ -16,8 +16,8 @@ class Calibration(object):
                 step=step,
                 number_of_parameters=number_of_parameters
         ):
-            regression = LinearRegression(parameters[1:], parameters[0])
-            predicted = list(map(regression.rational_value, self.__features))
+            regression = LinearRegression(parameters)
+            predicted = list(map(regression.apply, self.__features))
             yield Mse(self.__real, predicted).rational_value(), parameters
 
     def run(self, min_value: int, max_value: int, step: int, number_of_parameters: int):
